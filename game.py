@@ -47,26 +47,20 @@ def play_game():
 
         if guess < secret_number:
             print("Too low.")
-            difference = secret_number - guess
-            if difference > max_number // 2:
-                print("Hint: You're far off.")
-            else:
-                print("Hint: You're close.")
-            score -= 10
-
         elif guess > secret_number:
             print("Too high.")
-            difference = guess - secret_number
-            if difference > max_number // 2:
-                print("Hint: You're far off.")
-            else:
-                print("Hint: You're close.")
-            score -= 10
 
         else:
             print(f"Correct! You guessed it in {attempts} attempts.")
             print(f"Your score: {max(score, 0)}")
             return
+
+        difference = abs(secret_number - guess)
+        if difference > max_number // 2:
+            print("Hint: You're far off.")
+        else:
+            print("Hint: You're close.")
+        score -= 10
 
     print(f"\nGame over. The number was {secret_number}.")
     print(f"Your final score: 0")
@@ -80,4 +74,5 @@ def main():
             print("Thanks for playing.")
             break
 
-main()
+if __name__ == "__main__":
+    main()
