@@ -1,4 +1,7 @@
+"""Number Guessing Game module."""
+
 import random
+
 
 def get_integer(prompt, min_value=None, max_value=None):
     """Get a valid integer from the user with optional range checking."""
@@ -15,22 +18,25 @@ def get_integer(prompt, min_value=None, max_value=None):
         except ValueError:
             print("Invalid input. Enter a whole number.")
 
+
 def choose_difficulty():
+    """Prompt the user to choose a difficulty level."""
     print("\nChoose difficulty:")
     print("1. Easy   (1-20, 7 attempts)")
     print("2. Medium (1-50, 8 attempts)")
     print("3. Hard   (1-100, 10 attempts)")
-    
+
     choice = get_integer("Enter 1, 2, or 3: ", 1, 3)
 
     if choice == 1:
         return 20, 7
-    elif choice == 2:
+    if choice == 2:
         return 50, 8
-    else:
-        return 100, 10
+    return 100, 10
+
 
 def play_game():
+    """Play one round of the Number Guessing Game."""
     print("Welcome to the Number Guessing Game!")
 
     max_number, max_attempts = choose_difficulty()
@@ -42,7 +48,9 @@ def play_game():
     print(f"You have {max_attempts} attempts.")
 
     while attempts < max_attempts:
-        guess = get_integer(f"Attempt {attempts + 1}. Take a guess: ", 1, max_number)
+        guess = get_integer(
+            f"Attempt {attempts + 1}. Take a guess: ", 1, max_number
+        )
         attempts += 1
 
         if guess < secret_number:
@@ -69,15 +77,23 @@ def play_game():
             return
 
     print(f"\nGame over. The number was {secret_number}.")
-    print(f"Your final score: 0")
+    print("Your final score: 0")
+
 
 def main():
+    """Main loop for the game."""
     while True:
-        play_game()
+        try:
+            play_game()
 
-        again = input("\nPlay again? (yes/no): ").strip().lower()
-        if again not in ("yes", "y"):
-            print("Thanks for playing.")
+            again = input("\nPlay again? (yes/no): ").strip().lower()
+            if again not in ("yes", "y"):
+                print("Thanks for playing.")
+                break
+        except (EOFError, KeyboardInterrupt):
+            print("\nThanks for playing.")
             break
 
-main()
+
+if __name__ == "__main__":
+    main()
