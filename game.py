@@ -1,4 +1,4 @@
-import random
+import secrets
 
 def get_integer(prompt, min_value=None, max_value=None):
     """Get a valid integer from the user with optional range checking."""
@@ -34,7 +34,7 @@ def play_game():
     print("Welcome to the Number Guessing Game!")
 
     max_number, max_attempts = choose_difficulty()
-    secret_number = random.randint(1, max_number)
+    secret_number = secrets.randbelow(max_number) + 1
     attempts = 0
     score = 100
 
@@ -80,4 +80,5 @@ def main():
             print("Thanks for playing.")
             break
 
-main()
+if __name__ == "__main__":
+    main()
