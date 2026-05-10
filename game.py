@@ -41,6 +41,8 @@ def play_game():
     print(f"\nI'm thinking of a number between 1 and {max_number}.")
     print(f"You have {max_attempts} attempts.")
 
+    hint_threshold = max_number // 2
+
     while attempts < max_attempts:
         guess = get_integer(f"Attempt {attempts + 1}. Take a guess: ", 1, max_number)
         attempts += 1
@@ -48,7 +50,7 @@ def play_game():
         if guess < secret_number:
             print("Too low.")
             difference = secret_number - guess
-            if difference > max_number // 2:
+            if difference > hint_threshold:
                 print("Hint: You're far off.")
             else:
                 print("Hint: You're close.")
@@ -57,7 +59,7 @@ def play_game():
         elif guess > secret_number:
             print("Too high.")
             difference = guess - secret_number
-            if difference > max_number // 2:
+            if difference > hint_threshold:
                 print("Hint: You're far off.")
             else:
                 print("Hint: You're close.")
@@ -80,4 +82,5 @@ def main():
             print("Thanks for playing.")
             break
 
-main()
+if __name__ == "__main__":
+    main()
